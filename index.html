@@ -72,9 +72,7 @@
 </head>
 <body>
   
-  <audio id="opening" autoplay loop>
-    <source src = "https://raw.githubusercontent.com/Kibuutzuu/Fur-Charlotte/main/resource/death.mp3" type = "audio/mp3">
-  </audio>
+
 
   <script>
     const music = document.getElementByld("opening");
@@ -170,10 +168,96 @@
       }
     });
   </script>
+
+
+
+
+  
+  <div class="mini-player">
+  <img src="https://raw.githubusercontent.com/Kibuutzuu/Fur-Charlotte/main/resource/manzana.png" alt="Portada" class="cover">
+  <div class="info">
+    <p class="title">Besto opening </p>
+    <button id="playBtn">▶</button>
+  </div>
+  <audio id="opening" loop>
+    <source src = "https://raw.githubusercontent.com/Kibuutzuu/Fur-Charlotte/main/resource/death.mp3" type = "audio/mp3">
+  </audio>
+  </div>
+  
+<style>
+  .mini-player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 140px;
+    padding: 10px;
+    border-radius: 12px;
+    background: #1e1e1e;
+    color: white;
+    font-family: sans-serif;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .cover {
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-bottom: 8px;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .title {
+    font-size: 13px;
+    margin: 0 0 6px;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  #playBtn {
+    background: #1db954;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  #playBtn:hover {
+    background: #17a74a;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const music = document.getElementById("opening");
+    const btn = document.getElementById("playBtn");
+
+    music.volume = 0.6;
+
+    btn.textContent = music.paused ? "▶" : "⏸";
+
+    btn.addEventListener("click", () => {
+      if (music.paused) {
+        music.play();
+        btn.textContent = "⏸";
+      } else {
+        music.pause();
+        btn.textContent = "▶";
+      }
+    });
+  });
+</script>
+
 </body>
 </html>
-
-
-
-
-
