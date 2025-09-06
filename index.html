@@ -125,7 +125,7 @@
         analyser.getByteFrequencyData(dataArray);
         let volume = dataArray.reduce((a, b) => a + b) / dataArray.length;
 
-        if (volume > 60) {
+        if (volume > 40) {
           flama.style.display = "none";
           estado.textContent = "Velita apagada, yeiii tqm que cumplas muchisimos años mas 🎉";
         } else {
@@ -163,3 +163,4 @@
   </script>
 </body>
 </html>
+
