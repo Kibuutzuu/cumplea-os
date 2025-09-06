@@ -1,0 +1,81 @@
+<div class="mini-player">
+  <img src="https://via.placeholder.com/120x120.png?text=Portada" alt="Portada" class="cover">
+  <div class="info">
+    <p class="title">Mi Canción</p>
+    <button id="playBtn">▶</button>
+  </div>
+
+  <audio id="bgMusic">
+    <source src="https://raw.githubusercontent.com/tu-user/tu-repo/main/archivo.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
+<style>
+  .mini-player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 140px;
+    padding: 10px;
+    border-radius: 12px;
+    background: #1e1e1e;
+    color: white;
+    font-family: sans-serif;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+
+  .cover {
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-bottom: 8px;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .title {
+    font-size: 13px;
+    margin: 0 0 6px;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  #playBtn {
+    background: #1db954; /* verde Spotify */
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  #playBtn:hover {
+    background: #17a74a;
+  }
+</style>
+
+<script>
+  const music = document.getElementById("bgMusic");
+  const btn = document.getElementById("playBtn");
+
+  music.volume = 0.3; // volumen bajito
+  let isPlaying = false;
+
+  btn.addEventListener("click", () => {
+    if (isPlaying) {
+      music.pause();
+      btn.textContent = "▶";
+    } else {
+      music.play();
+      btn.textContent = "⏸";
+    }
+    isPlaying = !isPlaying;
+  });
+</script>
