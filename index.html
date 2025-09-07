@@ -1,9 +1,52 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
+
   <meta charset="UTF-8">
   <title>¡Feliz Cumpleaños!</title>
   <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    body {
+      cursor: url('https://cur.cursors-4u.net/anime/ani-6/ani546.cur'), auto;
+    }
+
+    #quotes-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      overflow: visible;
+      z-index: 20;
+    }
+
+    .floating-quote {
+      position: absolute;
+      color: #ff2c2c;
+      font-family: 'Special Elite', monospace;
+      font-size: 1.2em;
+      opacity: 0;
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+      animation: floatInOut 4s forwards;
+    }
+
+    @keyframes floatInOut {
+      0%   { opacity: 0; transform: translateY(10px); }
+      20%  { opacity: 1; transform: translateY(0); }
+      80%  { opacity: 1; transform: translateY(-30px); }
+      100% { opacity: 0; transform: translateY(-40px); }
+    }
+
+
+
+
     body {
       background-color: rgb(40, 37, 37);
       color: white;
@@ -12,6 +55,62 @@
       margin: 0;
       padding: 20px;
     }
+
+    .pixel-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='3' height='3'><rect width='1' height='1' fill='lime'/></svg>");
+      background-repeat: repeat;
+      background-size: 3px 3px;
+      opacity: 0.05;
+      z-index: 13;
+      pointer-events: none;
+    }
+
+
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0px,
+        rgba(0, 0, 0, 0) 2px,
+        rgba(0, 0, 0, 0.05) 4px
+      );
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    #crt-wrapper::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, transparent 0%, rgba(0, 0, 0, 0.2) 100%);
+      animation: flicker 0.15s infinite;
+      pointer-events: none;
+      z-index: 11;
+    }
+
+    @keyframes flicker {
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        opacity: 1;
+      }
+      20%, 22%, 24%, 55% {
+        opacity: 0.95;
+      }
+    }
+
 
     #container {
       position: relative;
@@ -67,11 +166,21 @@
         display: block;
         pointer-events: none;
     }
+    @keyframes scan {
+      0%   { top: -100px; opacity: 0.03; }
+      10%  { opacity: 0.06; }
+      50%  { opacity: 0.02; }
+      100% { top: 100%; opacity: 0.01; }
+    }
+
 
   </style>
 </head>
 <body>
   
+
+<div id="crt-wrapper"></div>
+  <div class="pixel-grid"></div>
 
 
   <script>
@@ -258,6 +367,106 @@
     });
   });
 </script>
+
+<script>
+  const scanline = document.createElement("div");
+  scanline.style.position = "absolute";
+  scanline.style.top = "-100px";
+  scanline.style.left = "0";
+  scanline.style.width = "100%";
+  scanline.style.height = "100px";
+  scanline.style.background = "rgba(255, 255, 255, 0.03)";
+  scanline.style.zIndex = "12";
+  scanline.style.pointerEvents = "none";
+  scanline.style.animation = "scan 5s linear infinite";
+
+  const wrapper = document.getElementById("crt-wrapper");
+  wrapper.appendChild(scanline);
+
+  const style = document.createElement("style");
+  style.textContent = `
+    @keyframes scan {
+      0% { top: -100px; }
+      100% { top: 100%; }
+    }
+  `;
+  document.head.appendChild(style);
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const quotes = [
+        "Al dios de la muerte le gustan las manzanas.",
+        "Al dios de la muerte le gustan las manzanas.",
+        "Al dios de la muerte le gustan las manzanas.",
+        "Al dios de la muerte le gustan las manzanas.",
+        "Al dios de la muerte le gustan las manzanas.",
+        "Soy Kira.",
+        "Soy Kira.",
+        "Si mataras a todos los asesinos del mundo, el unico asesino que quedaría... serías tú.",
+        "¡Te quiero más que ninguna otra persona! Siempre te estoy vigilando. Te quiero. ¡Quiero protegerte!",
+        "¿Qué le pasa? Es un humano... pero da miedo.",
+        "A partir de este momento te mostraré la creación del nuevo mundo.",
+        "¡El mundo está podrido, y la gente podrida merece morir!",
+        "Solemos aferrarnos a gente que solo nos hace daño.",
+        "No puedes ganar sí solo estás a la defensiva, para ganar ¡Hay que atacar!.",
+        "Una cosa es segura, L es real, yo existo, ahora trata de matarme.",
+        "No te creas tanto.",
+        "Y que la Justicia prevalezca ante todo....",
+        "No importa que tan capacitado estés, tu solo no podrás cambiar el mundo.",
+        "Crearemos un mundo nuevo juntos, será un lugar sin crimen dónde sólo vivan personas honestas.",
+        "Como castigo por desafiar al dios del nuevo mundo, morirás...",
+        "¡Lo que daría por una manzana!",
+        "De ahora en adelante, voy a mostrarte la reencarnación de un nuevo mundo, Ryuk.",
+        "Todos mis obstáculos fueron removidos. Ahora soy el dios del nuevo mundo.",
+        "Una persona puede acortar su vida usando la Death Note.",
+        "Death Note... si esto es real... Debo probarlo una vez más.",
+        "Escribe sus nombres y morirán.",
+        "Si gano, soy la Justicia, si pierdo, soy un criminal."
+    ];
+
+
+    const container = document.getElementById("quotes-container");
+
+    function randomBetween(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    function spawnQuote() {
+      if (!container) return;
+
+      const quoteText = quotes[Math.floor(Math.random() * quotes.length)];
+      const quoteEl = document.createElement("div");
+      quoteEl.classList.add("floating-quote");
+      quoteEl.textContent = quoteText;
+
+      const maxX = container.clientWidth - 200;
+      const maxY = container.clientHeight - 50;
+
+      quoteEl.style.left = randomBetween(0, maxX) + "px";
+      quoteEl.style.top = randomBetween(0, maxY) + "px";
+
+      container.appendChild(quoteEl);
+
+      setTimeout(() => {
+        container.removeChild(quoteEl);
+      }, 4000);
+    }
+
+    function startSpawning() {
+      spawnQuote();
+      const nextTime = randomBetween(500, 2000);
+      setTimeout(startSpawning, nextTime);
+    }
+
+    startSpawning();
+  });
+</script>
+
+
+</div>
+
+<div id="quotes-container"></div>
 
 </body>
 </html>
